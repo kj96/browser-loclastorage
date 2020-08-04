@@ -1,0 +1,185 @@
+<html>
+
+<head>
+    <style>
+        body {
+            background-color: #F3EBF6;
+            font-family: 'Ubuntu', sans-serif;
+        }
+
+        .main {
+            background-color: #FFFFFF;
+            width: 400px;
+            height: 340px;
+            margin: 7em auto;
+            border-radius: 1.5em;
+            box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+        }
+
+        .sign {
+            padding-top: 40px;
+            color: #8C55AA;
+            font-family: 'Ubuntu', sans-serif;
+            font-weight: bold;
+            font-size: 23px;
+        }
+
+        .un {
+            width: 76%;
+            color: rgb(38, 50, 56);
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 1px;
+            background: rgba(136, 126, 126, 0.04);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            outline: none;
+            box-sizing: border-box;
+            border: 2px solid rgba(0, 0, 0, 0.02);
+            margin-bottom: 50px;
+            margin-left: 46px;
+            text-align: center;
+            margin-bottom: 27px;
+            font-family: 'Ubuntu', sans-serif;
+        }
+
+        form.form1 {
+            padding-top: 40px;
+        }
+
+        .pass {
+            width: 76%;
+            color: rgb(38, 50, 56);
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 1px;
+            background: rgba(136, 126, 126, 0.04);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            outline: none;
+            box-sizing: border-box;
+            border: 2px solid rgba(0, 0, 0, 0.02);
+            margin-bottom: 50px;
+            margin-left: 46px;
+            text-align: center;
+            margin-bottom: 27px;
+            font-family: 'Ubuntu', sans-serif;
+        }
+
+
+        .un:focus,
+        .pass:focus {
+            border: 2px solid rgba(0, 0, 0, 0.18) !important;
+            top: 10px;
+            position: relative;
+        }
+
+        .submit {
+            cursor: pointer;
+            border-radius: 5em;
+            color: #fff;
+            background: linear-gradient(to right, #9C27B0, #E040FB);
+            border: 0;
+            padding-left: 40px;
+            padding-right: 40px;
+            padding-bottom: 10px;
+            padding-top: 10px;
+            font-family: 'Ubuntu', sans-serif;
+            margin-left: 35%;
+            font-size: 13px;
+            box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+        }
+
+        #is-user-sign {
+            position: relative;
+            top: 30px;
+        }
+
+        a {
+            text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+            color: #E1BEE7;
+            text-decoration: none
+        }
+
+        @media (max-width: 600px) {
+            .main {
+                border-radius: 0px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
+    <script src="/cols.js" charset="utf-8"></script>
+    <title>user !</title>
+</head>
+
+<body>
+    <a id='is-user-sign' onclick="postUser()" class="submit" align="center">Drop Contact!</a>
+    <a id='is-user-sign' onclick="getUser()" class="submit" align="center">LOG!</a>
+</body>
+
+<script>
+    (function () {
+        getUser();
+        console.log("@ getUser()");
+        alert("> User: " + localStorage.getItem('userContact'));
+    })();
+
+    function getUser() {
+        var userContact = localStorage.getItem('userContact');
+        var userEmail = localStorage.getItem('userEmail');
+        console.log('> userContact: ');
+        console.log(userContact);
+        console.log(userEmail);
+    }
+
+    function postUser () {
+        console.log("@fetchUser");
+        const url = "https://ptsv2.com/t/merformcontcatuser/post";
+        fetch(url, {
+            method : "POST",
+            // body: new FormData(document.getElementById("inputform")),
+            // -- or --
+            body : JSON.stringify({
+                user : localStorage.getItem('userContact'),
+                email : localStorage.getItem('userEmail')
+            })
+        }).then(
+            response => response.text() // .json(), etc.
+            // same as function(response) {return response.text();}
+        ).then(
+            html => console.log(html)
+        );
+    }
+
+
+    const allowedOrigins = [
+        'http://localhost:8800',
+        'http://localhost:5500',
+        'http://127.0.0.1:8800',
+        'http://127.0.0.1:5500'
+      ];
+
+    window.onload = () => {
+        const onMessage = (payload, event) => {
+            const data = payload.data;
+            switch (payload.method) {
+            case 'storage#get':
+                console.log('message data', payload);
+                break;
+            default:
+                console.error('Unknown method "' + payload.method + '"', payload);
+            }
+        };
+        const iframe = document.getElementsByTagName('iframe')[0];
+        const cross = new CrossOriginLocalStorage(window, iframe, allowedOrigins, onMessage);
+        cross.getData('userContact')
+        cross.getData('userEmail')
+    };
+
+</script>
+
+</html>
