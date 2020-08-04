@@ -10,7 +10,7 @@
         .main {
             background-color: #FFFFFF;
             width: 400px;
-            height: 340px;
+            height: 400px;
             margin: 7em auto;
             border-radius: 1.5em;
             box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
@@ -92,9 +92,10 @@
             box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
         }
 
-        #is-user-sign {
-            position: relative;
-            top: 30px;
+        .forgot {
+            text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+            color: #E1BEE7;
+            padding-top: 15px;
         }
 
         a {
@@ -112,22 +113,32 @@
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
-    <title>user !</title>
+    <title>MeroForm</title>
 </head>
 
 <body>
-    <a id='is-user-sign' onclick="postUser()" class="submit" align="center">Drop Contact!</a>
-    <a id='is-user-sign' onclick="getUser()" class="submit" align="center">LOG!</a>
+    <div class="main">
+        <p class="sign" align="center">MeroForm</p>
+        <form class="form1">
+            <input id="username" class="un " type="text" align="center" placeholder="Username">
+            <input id="useremail" class="un " type="email" align="center" placeholder="Email">
+            <input id="password" class="pass" type="password" align="center" placeholder="Password">
+            <a id='user-sign' onclick="setUser()" class="submit" align="center">Sign in</a>
+    </div>
+
+    <iframe width="100%" src="http://localhost:8800/frame.html"></iframe>
 </body>
 
 <script>
-    (function () {
-        getUser();
-        console.log("@ getUser()");
-        // alert("> User: " + localStorage.getItem('userContact'));
-    })();
 
-    function getUser() {
+    // function setCookie(cname, cvalue, exdays) {
+    //     var d = new Date();
+    //     d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    //     var expires = "expires="+ d.toUTCString();
+    //     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    // }
+
+    (function () {
         // var userContact = localStorage.getItem('userContact');
         // var userEmail = localStorage.getItem('userEmail');
         console.log('> userContact: ');
@@ -135,27 +146,25 @@
         // console.log(userEmail);
 
         console.log(document.cookie);
-    }
+    })();
 
-    function postUser () {
-        console.log("@fetchUser");
-        const url = "https://ptsv2.com/t/merformcontcatuser/post";
-        fetch(url, {
-            method : "POST",
-            // body: new FormData(document.getElementById("inputform")),
-            // -- or --
-            body : JSON.stringify({
-                user : localStorage.getItem('userContact'),
-                email : localStorage.getItem('userEmail')
-            })
-        }).then(
-            response => response.text() // .json(), etc.
-            // same as function(response) {return response.text();}
-        ).then(
-            html => console.log(html)
-        );
-    }
+    function setUser() {
+        // localStorage.setItem('userContact', JSON.stringify(document.getElementById('username').value));
+        // localStorage.setItem('userEmail', JSON.stringify(document.getElementById('useremail').value));
 
+        console.log("SET USER!");
+        
+        document.cookie = "name=testName;domain=localhost";
+        document.cookie = "email=testEmail;domain=localhost";
+        document.cookie = "name=testName;domain=127.0.0.1";
+        document.cookie = "email=testEmail;domain=127.0.0.1";
+
+        console.log(document.cookie);
+        // console.log(localStorage.getItem('userContact'));
+        // console.log(localStorage.getItem('userEmail'));
+
+    }
+    
 </script>
 
 </html>
