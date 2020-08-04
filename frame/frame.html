@@ -111,6 +111,7 @@
     </style>
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="/js.cookie.min.js"></script>
     <!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
     <title>user !</title>
 </head>
@@ -135,6 +136,8 @@
         // console.log(userEmail);
 
         console.log(document.cookie);
+        console.log(Cookies.get('name', { domain: '127.0.0.1' }));
+        console.log(Cookies.get('name', { domain: 'localhost' }));
     }
 
     function postUser () {
