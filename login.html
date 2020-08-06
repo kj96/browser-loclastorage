@@ -1,0 +1,172 @@
+<html>
+
+<head>
+    <style>
+        body {
+            background-color: #F3EBF6;
+            font-family: 'Ubuntu', sans-serif;
+        }
+
+        .main {
+            background-color: #FFFFFF;
+            width: 400px;
+            height: 400px;
+            margin: 7em auto;
+            border-radius: 1.5em;
+            box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+        }
+
+        .sign {
+            padding-top: 40px;
+            color: #8C55AA;
+            font-family: 'Ubuntu', sans-serif;
+            font-weight: bold;
+            font-size: 23px;
+        }
+
+        .un {
+            width: 76%;
+            color: rgb(38, 50, 56);
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 1px;
+            background: rgba(136, 126, 126, 0.04);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            outline: none;
+            box-sizing: border-box;
+            border: 2px solid rgba(0, 0, 0, 0.02);
+            margin-bottom: 50px;
+            margin-left: 46px;
+            text-align: center;
+            margin-bottom: 27px;
+            font-family: 'Ubuntu', sans-serif;
+        }
+
+        form.form1 {
+            padding-top: 40px;
+        }
+
+        .pass {
+            width: 76%;
+            color: rgb(38, 50, 56);
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 1px;
+            background: rgba(136, 126, 126, 0.04);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            outline: none;
+            box-sizing: border-box;
+            border: 2px solid rgba(0, 0, 0, 0.02);
+            margin-bottom: 50px;
+            margin-left: 46px;
+            text-align: center;
+            margin-bottom: 27px;
+            font-family: 'Ubuntu', sans-serif;
+        }
+
+
+        .un:focus,
+        .pass:focus {
+            border: 2px solid rgba(0, 0, 0, 0.18) !important;
+            top: 10px;
+            position: relative;
+        }
+
+        .submit {
+            cursor: pointer;
+            border-radius: 5em;
+            color: #fff;
+            background: linear-gradient(to right, #9C27B0, #E040FB);
+            border: 0;
+            padding-left: 40px;
+            padding-right: 40px;
+            padding-bottom: 10px;
+            padding-top: 10px;
+            font-family: 'Ubuntu', sans-serif;
+            margin-left: 35%;
+            font-size: 13px;
+            box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+        }
+
+        .forgot {
+            text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+            color: #E1BEE7;
+            padding-top: 15px;
+        }
+
+        a {
+            text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+            color: #E1BEE7;
+            text-decoration: none
+        }
+
+        @media (max-width: 600px) {
+            .main {
+                border-radius: 0px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="/js.cookie.min.js"></script>
+    <!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
+    <title>MeroForm</title>
+</head>
+
+<body>
+    <div class="main">
+        <p class="sign" align="center">MeroForm</p>
+        <form class="form1">
+            <input id="username" class="un " type="text" align="center" placeholder="Username">
+            <input id="useremail" class="un " type="email" align="center" placeholder="Email">
+            <input id="password" class="pass" type="password" align="center" placeholder="Password">
+            <a id='user-sign' onclick="setUser()" class="submit" align="center">Sign in</a>
+    </div>
+
+    <iframe width="100%" src="http://localhost:8800/frame.html"></iframe>
+</body>
+
+<script>
+
+    // function setCookie(cname, cvalue, exdays) {
+    //     var d = new Date();
+    //     d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    //     var expires = "expires="+ d.toUTCString();
+    //     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    // }
+
+    (function () {
+        // var userContact = localStorage.getItem('userContact');
+        // var userEmail = localStorage.getItem('userEmail');
+        console.log('> userContact: ');
+        // console.log(userContact);
+        // console.log(userEmail);
+
+        console.log(document.cookie);
+        console.log(Cookies.get('name'));
+        console.log(Cookies.get('name', { domain: '127.0.0.1' }));
+        console.log(Cookies.get('name', { domain: 'localhost' }));
+    })();
+
+    function setUser() {
+        // localStorage.setItem('userContact', JSON.stringify(document.getElementById('username').value));
+        // localStorage.setItem('userEmail', JSON.stringify(document.getElementById('useremail').value));
+
+        console.log("SET USER!");
+        
+        Cookies.set('name', 'someName', { domain: '127.0.0.1' })
+        Cookies.set('name', 'someName', { domain: 'localhost' })
+
+        console.log(document.cookie);
+        // console.log(localStorage.getItem('userContact'));
+        // console.log(localStorage.getItem('userEmail'));
+
+    }
+    
+</script>
+
+</html>
